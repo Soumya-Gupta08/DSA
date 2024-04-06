@@ -1,0 +1,13 @@
+                    // Fibonacci Series //
+                        {Self-made} ♡♡
+
+  public static void printFib(int a, int b, int n) {
+        if(n==0) {
+            return;
+        }
+        System.out.println(a);
+        int c=a+b;
+        printFib(b,c,n-1);
+    }
+
+                    //   //
