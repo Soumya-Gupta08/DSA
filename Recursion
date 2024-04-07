@@ -10,4 +10,108 @@
         printFib(b,c,n-1);
     }
 
-                    //   //
+                    // Tower of Hanoi //
+
+    public static void towerOfHanoi(int n, String src, String helper, String dest) {
+        if(n==0) {
+            return;
+        }
+        towerOfHanoi(n-1, src, dest, helper);
+        System.out.println("Transfer disk "+n+" from "+src+" to "+dest);
+        towerOfHanoi(n-1, helper, src, dest);
+    }
+
+                    // Reversing a String //
+
+    public static void printReverse(String str, int idx) {
+        if(idx==0) {
+            return;
+        }
+        System.out.print(str.charAt(idx-1));
+        printReverse(str,idx-1);
+    }
+
+                    // Finding first & last occurence of an element in String //
+
+    public static int first=-1;
+    public static int last=-1;
+    public static void occurence(String str, char element, int idx) {
+        if(idx==str.length()) {
+            System.out.println(first);
+            System.out.println(last);
+            return;
+        }
+        char currChar=str.charAt(idx);
+        if(currChar==element) {
+            if(first==-1) {
+                first=idx;
+            }
+            else {
+                last=idx;
+            }
+        }
+        occurence(str, element, idx+1);
+    }
+
+                    // Checking if an array is sorted //
+
+    public static boolean isSorted(int[] arr, int idx) {
+        if(idx==arr.length) {
+            return true;
+        }
+        if(arr[idx]<arr[idx-1]) {
+            return false;
+        }
+        return isSorted(arr, idx+1);
+    }
+
+                    // Moving all copies of element to the last //
+
+    public static String moveToEnd(String str, char element, int idx, int count, String newStr) {
+        if(idx==str.length()) {
+            for(int i=0; i<count; i++) {
+                newStr+=element;
+            }
+            return newStr;
+        }
+        if(str.charAt(idx)==element) {
+            count++;
+        }
+        else {
+            newStr+=str.charAt(idx);
+        }
+        return moveToEnd(str, element, idx+1, count, newStr);
+    }
+
+                    // Remove duplicates from a string //
+
+    public static boolean[] arr=new boolean[26];
+    public static String removeDuplicates(String str, int idx, String newStr) {
+        if(idx==str.length()) {
+            return newStr;
+        }
+        int i=(int)(str.charAt(idx)-'a');
+        if(!arr[i]) {
+            newStr+=str.charAt(idx);
+            arr[i]=true;
+        }
+        return removeDuplicates(str, idx+1, newStr);
+    }
+
+                ❤️ // Printing all the subsequences of a String // ❤️
+            {if 2 calls are present in recursive method, go with void} ♡♡
+                        {avoid going with any data type}
+
+    public static void subsequences(String str, int idx, String newStr) {
+        if(idx==str.length()) {
+            System.out.println(newStr);
+            return;
+        }
+        // to be
+        subsequences(str, idx+1, newStr+str.charAt(idx));
+        // not to be
+        subsequences(str, idx+1, newStr);
+    }
+
+                    //  //
+
