@@ -1,0 +1,58 @@
+                **TIME COMPLEXITY**
+                    BEST:  O(1)
+                    WORST: O(log2(n))
+
+            1) For known ASC ordered array
+            2) For unknown ordered array
+
+
+                    // known ASC ordered array //
+
+    public static int binarySearch(int[] arr, int target) {
+        int s=0;
+        int e=arr.length-1;
+        while(s<=e) {
+            int m= s+(e-s)/2;                    ----> {Optimisation}
+            if(arr[m]==target) {
+                return m;
+            } else if(arr[m]<target) {
+                s=m+1;
+            } else {
+                e=m-1;
+            }
+        }
+        return -1;
+    }
+
+                                ** Order-Agnostic Binary Search **
+            (taking 's' and 'e' to determine the order is the best since and two taken can be the same. 
+                                Thus, will face difficulty. if s=e it'll mean that it's an array of same element)
+
+
+                        // unknown ordered array //
+
+    public static int binarySearch(int[] arr, int target) {
+        int start=0;
+        int end=arr.length-1;
+        boolean isASC=arr[start]<arr[end];
+        while(start<=end) {
+            int mid= start+(end-start)/2;                    ----> {Optimisation}
+            if(arr[mid]==target) {
+                return mid;
+            }
+            if(isASC) {
+                if(arr[mid]>target) {
+                    end=mid-1;
+                } else if(arr[mid]<target) {
+                    start=mid+1;
+                }
+            } else {
+                if(arr[mid]<target) {
+                    end=mid-1;
+                } else if(arr[mid]>target) {
+                    start=mid+1;
+                }
+            }
+        }
+        return -1;
+    }
