@@ -1,0 +1,52 @@
+    
+                                // Keypad Combinations //
+                                // Leetcode 17
+    
+    public static List<String> letterCombinations(String digits) {
+        List<String> list=new ArrayList<>();
+        String[] keypad={"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        list=letterCombinations(digits, 0, "", keypad);
+        return list;
+    }
+    public static List<String> letterCombinations(String digits, int idx, String ans, String[] keypad) {
+        List<String> list=new ArrayList<>();
+        if(idx==digits.length()) {
+            if(ans.length()==0) {
+                return list;
+            }
+            list.add(ans);
+            return list;
+        }
+        int num=digits.charAt(idx)-'0';
+        int n=keypad[num-2].length();
+        for(int i=0; i<n; i++) {
+            List<String> newList=letterCombinations(digits, idx+1, ans+keypad[num-2].charAt(i), keypad);
+            list.addAll(newList);
+        }
+        return list;
+    }
+
+                            // Given an integer, find out the comos in which the add up to that integer //
+    
+    public static List<List<Integer>> diceRoll(int n) {
+        List<List<Integer>> list=new ArrayList<>();
+        int[] arr={1, 2, 3, 4, 5, 6};
+        list=diceRoll(n, new ArrayList<>(), 0, arr);
+        return list;
+    }
+    public static List<List<Integer>> diceRoll(int n, List<Integer> nums, int num, int[] arr) {
+        List<List<Integer>> list=new ArrayList<>();
+        if(n-num==0) {
+            list.add(nums);
+            return list;
+        }
+        for(int i=0; i<arr.length; i++) {
+            if(n-num>=arr[i]) {
+                List<Integer> l=new ArrayList<>(nums);
+                l.add(arr[i]);
+                List<List<Integer>> newList=diceRoll(n, l, num+arr[i], arr);
+                list.addAll(newList);
+            }
+        }
+        return list;
+    }
