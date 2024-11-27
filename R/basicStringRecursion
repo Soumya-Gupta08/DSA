@@ -1,0 +1,38 @@
+
+
+  public static String removeA(String str, int idx) {
+        if(idx==str.length()) {
+            return "";
+        }
+        char ch=str.charAt(idx);
+        if(ch=='a') {
+            return removeA(str, idx+1);
+        } else {
+            return ch+removeA(str, idx+1);
+        }
+    }
+    public static StringBuilder removea(String str, int idx) {
+        StringBuilder ans=new StringBuilder();
+        if(idx==str.length()) {
+            return ans;
+        }
+        char ch=str.charAt(idx);
+        if(ch!='a') {
+            ans.append(ch);
+        }
+        StringBuilder fromBelow=removea(str, idx+1);
+        ans.append(fromBelow);
+        return ans;
+
+    }
+    public static String removeApple(String str, int idx) {
+        if(idx==str.length()) {
+            return "";
+        }
+        char ch=str.charAt(idx);
+        if(str.startsWith("apple")) {
+            return removeApple(str, idx+5);
+        } else {
+            return ch+removeApple(str, idx+1);
+        }
+    }
