@@ -1,0 +1,102 @@
+
+
+
+  public static void stringSubset(String str, int idx, String ans) {
+        if(idx==str.length()) {
+            System.out.println(ans);
+            return;
+        }
+        char ch=str.charAt(idx);
+        stringSubset(str, idx+1, ans+ch);
+        stringSubset(str, idx+1, ans);
+    }
+
+    public static ArrayList<String> stringSubsetList(String str, int idx, String ans) {
+        if(idx==str.length()) {
+            ArrayList<String> list=new ArrayList<>();
+            list.add(ans);
+            return list;
+        }
+        char ch=str.charAt(idx);
+        ArrayList<String> left=stringSubsetList(str, idx+1, ans+ch);
+        ArrayList<String> right=stringSubsetList(str, idx+1, ans);
+
+        left.addAll(right);
+        return left;
+    }
+
+    public static List<List<Integer>> arraySubsetList(int[] arr, int idx, List<Integer> ans) {
+        List<List<Integer>> list=new ArrayList<>();
+        if(idx==arr.length) {
+            list.add(ans);
+            return list;
+        }
+        List<List<Integer>> left=arraySubsetList(arr, idx+1, ans);
+        list.addAll(left);
+        List<Integer> a=new ArrayList<>(ans);
+        a.add(arr[idx]);
+        List<List<Integer>> right=arraySubsetList(arr, idx+1, a);
+        list.addAll(right);
+
+        return list;
+    }
+
+    public static List<List<Integer>> arrSubsetList(int[] arr) {  //   🩷🩷🩷   //
+        List<List<Integer>> list=new ArrayList<>();               // Time complexity - O(n*2^n) - Space complexity
+        list.add(new ArrayList<>());                              // Check on ChatGPT or notes
+        for(int num: arr) {
+            int n=list.size();
+            for(int i=0; i<n; i++) {
+                List<Integer> newList=new ArrayList<>(list.get(i));
+                newList.add(num);
+                list.add(newList);
+            }
+        }
+
+        return list;
+    }
+
+    public static void permutation(String str, int idx, String ans) {
+        if(idx==str.length()) {
+            System.out.println(ans);
+            return;
+        }
+        char ch=str.charAt(idx);
+        int n=ans.length();
+        for(int i=0; i<=n; i++) {
+            String f = ans.substring(0, i);
+            String p = ans.substring(i, n);
+            permutation(str, idx + 1, f + ch + p);
+        }
+    }
+    public static List<String> permutationList(String str, int idx, String ans) {
+        List<String> list=new ArrayList<>();
+        if(idx==str.length()) {
+            list.add(ans);
+            return list;
+        }
+        char ch=str.charAt(idx);
+        int n=ans.length();
+        for(int i=0; i<=n; i++) {
+            String f = ans.substring(0, i);
+            String p = ans.substring(i, n);
+            List<String> newList=permutationList(str, idx + 1, f + ch + p);
+            list.addAll(newList);
+        }
+
+        return list;
+    }
+    public static int permutationCount(String str, int idx, String ans) {
+        if(idx==str.length()) {
+            return 1;
+        }
+        int count=0;
+        char ch=str.charAt(idx);
+        int n=ans.length();
+        for(int i=0; i<=n; i++) {
+            String f = ans.substring(0, i);
+            String p = ans.substring(i, n);
+            count+=permutationCount(str, idx + 1, f + ch + p);
+        }
+        return count;
+    }
